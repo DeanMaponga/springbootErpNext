@@ -1,0 +1,39 @@
+# Spring Boot
+/target/
+/bin/
+/build/
+/.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE-specific
+.idea/
+.vscode/
+*.iml
+
+# Application properties
+src/main/resources/application.properties
+
+# Logs
+/logs/
+
+# Gradle
+.gradle/
+.gradle/
+.gradle-cache/
+
+# Maven
+.m2/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.springBeans
+
+# IntelliJ
+*.ipr
+*.iws
+*.iml
+.idea/
+out/
+gen/

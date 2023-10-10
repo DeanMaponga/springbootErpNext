@@ -1,0 +1,21 @@
+Tuesday 10 October 2023
+15:07
+- initialized springboot using spring initializer
+
+#Creating mysql database
+- sudo mysql
+- CREATE DATABASE erpnextdb;
+- CREATE USER 'erpnextuser'@'localhost' IDENTIFIED BY 'TestPassword'; #Use secure password, don't store in git
+- GRANT ALL PRIVILEGES ON erpnextdb.* TO 'erpnextuser'@'localhost';
+- FLUSH PRIVILEGES;
+
+#install ERPNext (https://www.rosehosting.com/blog/how-to-install-erpnext-on-ubuntu-22-04/)
+- useradd -m -d /opt/erpnext -U -r -s /bin/bash erpnext
+- sudo usermod -aG sudo erpnext
+- sudo apt install python3-pip python3-dev python3.10-venv python3-testresources libffi-dev libssl-dev wkhtmltopdf gcc g++ make redis-server -y
+- sudo su - erpnext
+- nano ~/.bashrc
+- append this: PATH=$PATH:~/.local/bin/
+- save & exit
+- source ~/.bashrc
+- sudo mkdir /opt/bench
