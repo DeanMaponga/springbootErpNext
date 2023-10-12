@@ -24,13 +24,14 @@ public class Employee implements Serializable{
     private String phoneNumber;
     private String imageUrl;
     private Long startDate;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
+    private Long companyUid;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "company_id")
     private Company company;
 
     public Employee(){}
-    public Employee(String name,String email, String jobTitle, String jobDescription, String phoneNumber, String imageUrl, Long startDate,Company company){
+    public Employee(String name,String email, String jobTitle, String jobDescription, String phoneNumber, String imageUrl, Long startDate,Long companyUid,Company company){
         this.name = name;
         this.email = email;
         this.jobTitle = jobTitle;
@@ -38,6 +39,7 @@ public class Employee implements Serializable{
         this.phoneNumber = phoneNumber;
         this.imageUrl =imageUrl;
         this.startDate = startDate;
+        this.companyUid =companyUid;
         this.company = company;
     }
     public void setId(Long id){
@@ -63,6 +65,9 @@ public class Employee implements Serializable{
     }
     public void setStartDate(Long startDate){
         this.startDate = startDate;
+    }
+    public void setCompanyUid(Long companyUid){
+        this.companyUid = companyUid;
     }
     public void setCompany(Company company){
         this.company = company;
@@ -92,6 +97,9 @@ public class Employee implements Serializable{
     public Long getStartDate(){
         return startDate;
     }
+    public Long getCompanyUid(){
+        return companyUid;
+    }
     public Company getCompany(){
         return company;
     }
@@ -107,6 +115,7 @@ public class Employee implements Serializable{
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", startDate=" + startDate +
+                ", companyUid=" + companyUid +
                 ", company=" + company +
                 '}';
     }

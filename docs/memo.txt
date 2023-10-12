@@ -98,3 +98,6 @@ Thursday 12 October 2023 - creating basic springboot application
 - GRANT ALL PRIVILEGES ON erpnextdb.* TO 'erpnextuser'@'localhost';
 - FLUSH PRIVILEGES;
 
+03:03 - testing endpoints
+- company endpoints working well
+- employee endpoints working well

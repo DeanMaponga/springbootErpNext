@@ -21,10 +21,9 @@ public class Company implements Serializable{
     private String phoneNumber;
     private String imageUrl;
     private Long createdDate;
-    private Long numberOfEmployees;
 
     public Company(){}
-    public Company(String name,String address, String industry, String description, String phoneNumber, String imageUrl, Long createdDate,Long numberOfEmployees){
+    public Company(String name,String address, String industry, String description, String phoneNumber, String imageUrl, Long createdDate){
         this.name = name;
         this.address = address;
         this.industry = industry;
@@ -32,7 +31,6 @@ public class Company implements Serializable{
         this.phoneNumber = phoneNumber;
         this.imageUrl =imageUrl;
         this.createdDate = createdDate;
-        this.numberOfEmployees=numberOfEmployees;
     }
     
     public void setId(Long id){
@@ -59,9 +57,6 @@ public class Company implements Serializable{
     public void setCreatedDate(Long createdDate){
         this.createdDate=createdDate;
     }
-    public void setNumberOfEmployees(Long nummberOfEmployees){
-        this.numberOfEmployees =nummberOfEmployees;
-    }
 
     public Long getId(){
         return this.id;
@@ -87,9 +82,6 @@ public class Company implements Serializable{
     public Long getCreatedDate(){
         return this.createdDate;
     }
-    public Long getNumberOfEmployees(){
-        return this.numberOfEmployees;
-    }
 
     @Override
     public String toString() {
@@ -102,7 +94,6 @@ public class Company implements Serializable{
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", createdDate=" + createdDate +
-                ", numberOfEmployees=" + numberOfEmployees +
                 '}';
     }
 }

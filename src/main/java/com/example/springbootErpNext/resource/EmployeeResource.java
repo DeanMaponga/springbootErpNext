@@ -1,4 +1,5 @@
 package com.example.springbootErpNext.resource;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.springbootErpNext.exceptions.EmployeeNotFoundException;
 import com.example.springbootErpNext.models.Employee;
 import com.example.springbootErpNext.service.EmployeeService;
 
@@ -29,10 +31,27 @@ public class EmployeeResource {
         return new ResponseEntity<>(employees,HttpStatus.OK);
     }
 
+    @GetMapping("/company/{companyUid}")
+    public ResponseEntity<List<Employee>> getEmployeesByCompnayUid(@PathVariable("companyUid") Long companyUid){
+        List<Employee>employees = employeeService.findEmployeeByCompanyUid(companyUid);
+        return new ResponseEntity<>(employees,HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Employee>> getEmployeesByName(@Param("name") String name){
+        List<Employee>employees = employeeService.findEmployeeByName(name);
+        return new ResponseEntity<>(employees,HttpStatus.OK);
+    }
+
     @GetMapping("/find/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id){
-        Employee employee = employeeService.findEmployeeById(id);
-        return new ResponseEntity<>(employee,HttpStatus.OK);
+        try{
+            Employee employee = employeeService.findEmployeeById(id);
+            return new ResponseEntity<>(employee,HttpStatus.OK);
+        }
+        catch(EmployeeNotFoundException exception){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/add")

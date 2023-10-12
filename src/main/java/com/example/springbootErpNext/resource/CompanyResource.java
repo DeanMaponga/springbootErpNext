@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.springbootErpNext.exceptions.CompanyNotFoundException;
 import com.example.springbootErpNext.models.Company;
 import com.example.springbootErpNext.service.CompanyService;
 
@@ -23,15 +24,20 @@ public class CompanyResource {
         this.companyService = companyService;
     }
      @GetMapping("/all")
-    public ResponseEntity<List<Company>> getAllCompanys(){
-        List<Company>companys = companyService.findAllCompanies();
-        return new ResponseEntity<>(companys,HttpStatus.OK);
+    public ResponseEntity<List<Company>> getAllCompanies(){
+        List<Company>companies = companyService.findAllCompanies();
+        return new ResponseEntity<>(companies,HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
     public ResponseEntity<Company> getCompanyById(@PathVariable("id") Long id){
-        Company company = companyService.findCompanyById(id);
-        return new ResponseEntity<>(company,HttpStatus.OK);
+        try{
+            Company company = companyService.findCompanyById(id);
+            return new ResponseEntity<>(company,HttpStatus.OK);    
+        }
+        catch(CompanyNotFoundException exception){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/add")
