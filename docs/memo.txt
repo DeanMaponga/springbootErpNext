@@ -101,3 +101,6 @@ Thursday 12 October 2023 - creating basic springboot application
 03:03 - testing endpoints
 - company endpoints working well
 - employee endpoints working well
+
+04:28 - adding angular client
+- created CorsConfig
