@@ -30,21 +30,28 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { CompanyDetailsComponent } from './company-details/company-details.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployeeNewComponent } from './employee-new/employee-new.component';
+import { CompanyDeleteComponent } from './company-delete/company-delete.component';
+import { CompanyNewComponent } from './company-new/company-new.component';
+import { CompanyUpdateComponent } from './company-update/company-update.component';
+import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
+import { EmployeeDeleteComponent } from './employee-delete/employee-delete.component';
+import { EmployeeSearchComponent } from './employee-search/employee-search.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   
   { path: 'employees', component: EmployeeComponent },
   { path: 'employee/:id', component: EmployeeDetailsComponent },
-  { path: 'update-employee/:id', component: EmployeeFormComponent},
-  //{ path: 'search-employee', component: EmployeeSearchComponent },
+  { path: 'employee/:id/update', component: EmployeeUpdateComponent},
+  { path: 'employee-search', component: EmployeeSearchComponent },
   //{ path: 'search-employee-results', component: EmployeeSearchResultsComponent },
   
   { path: 'companies', component: CompanyComponent },
-  { path: 'add-company', component: CompanyFormComponent },
+  { path: 'add-company', component: CompanyNewComponent },
   { path: 'company/:id', component: CompanyDetailsComponent },
-  { path: 'company/:id/update', component: CompanyFormComponent},
-  { path: 'company/:id/newEmployee', component: EmployeeFormComponent },
+  { path: 'company/:id/update', component: CompanyUpdateComponent},
+  { path: 'company/:id/newEmployee', component: EmployeeNewComponent },
   
   { path: '', redirectTo: '/add-company', pathMatch: 'full' }
 ];
@@ -61,6 +68,13 @@ const routes: Routes = [
     CompanyCardComponent,
     EmployeeDetailsComponent,
     CompanyDetailsComponent,
+    EmployeeNewComponent,
+    CompanyDeleteComponent,
+    CompanyNewComponent,
+    CompanyUpdateComponent,
+    EmployeeUpdateComponent,
+    EmployeeDeleteComponent,
+    EmployeeSearchComponent,
   ],
   imports: [
     BrowserModule,

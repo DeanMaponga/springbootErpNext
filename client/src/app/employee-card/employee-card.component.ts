@@ -13,7 +13,6 @@ export class EmployeeCardComponent implements OnInit{
   constructor(private router: Router,private apiService:ApiService) {}
 
   ngOnInit() {
-    console.log(this.employee);
   }
 
   getStartDate(){
@@ -23,10 +22,7 @@ export class EmployeeCardComponent implements OnInit{
 
   navigateToEmployee(){
     if(this.employee!=undefined && this.employee.id!=null){
-      this.apiService.tempCompany =this.employee.company;
-      this.apiService.tempEmployee =this.employee;
-      const companyId = this.apiService.tempCompany.id;
-      this.router.navigate([`/company/${companyId}/newEmployee`]);
+      this.router.navigate([`/employee/${this.employee?.id}`]);
     }
   }
 }

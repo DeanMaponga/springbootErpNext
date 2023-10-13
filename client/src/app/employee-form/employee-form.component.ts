@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Employee } from '../models/employee_model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { DatePipe, Location } from '@angular/common';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 import { Company } from '../models/company_model';
@@ -20,16 +20,7 @@ export class EmployeeFormComponent {
   errorMsg ="";
   successMsg =""
   title="";
-  tempCompany:Company={
-    id: null,
-    name: '',
-    address: '',
-    industry: '',
-    description: '',
-    phoneNumber: '',
-    imageUrl: '',
-    createdDate: new Date().getTime()
-  }
+  
   @Input() employee:Employee|Employee={
     id: null,
     name: '',
@@ -40,26 +31,24 @@ export class EmployeeFormComponent {
     imageUrl: '',
     startDate: new Date().getTime(),
     companyUid: 0,
-    company: this.tempCompany
+    company:{
+      id: null,
+      name: '',
+      address: '',
+      industry: '',
+      description: '',
+      phoneNumber: '',
+      imageUrl: '',
+      createdDate: new Date().getTime()
+    }
   };
 
   employeeForm: FormGroup = new FormGroup({});
 
-  constructor(private router: Router,private apiService: ApiService,private formBuilder: FormBuilder,private datePipe: DatePipe) { }
+  constructor(private router: Router,private apiService: ApiService,private formBuilder: FormBuilder,private datePipe: DatePipe,private location: Location) { }
 
   ngOnInit() {
     this.isUpdate = this.employee.id!=null;
-    this.tempCompany ={
-      id: this.apiService.tempCompany.id,
-      name: this.apiService.tempCompany.name,
-      address: this.apiService.tempCompany.address,
-      industry: this.apiService.tempCompany.industry,
-      description: this.apiService.tempCompany.description,
-      phoneNumber: this.apiService.tempCompany.phoneNumber,
-      imageUrl: this.apiService.tempCompany.imageUrl,
-      createdDate: new Date().getTime()
-    }
-    this.employee.company = this.tempCompany;
     this.employeeForm = this.formBuilder.group({
       id: [this.employee.id],
       name: [this.employee.name, Validators.required],
@@ -70,7 +59,6 @@ export class EmployeeFormComponent {
       imageUrl: [this.employee.imageUrl, Validators.required],
       registrationDate: [this.getDate(), Validators.required],
     });
-    console.log(this.employee.company);
     this.title = this.isUpdate?"Update Employee":"Add Employee";
     this.successMsg = this.isUpdate?"Employee updated successfully!":"Employee added successfully!";
   }
@@ -86,8 +74,6 @@ export class EmployeeFormComponent {
       this.isLoading = true;
       this.isError = false;
       this.isSuccess =  false;
-      this.employee.company = this.tempCompany;
-      this.employee.companyUid = this.tempCompany.id!=null?this.tempCompany.id:0;
       this.employee.name =this.employeeForm.value.name;
       this.employee.email = this.employeeForm.value.email;
       this.employee.jobTitle=this.employeeForm.value.jobTitle;
@@ -101,7 +87,6 @@ export class EmployeeFormComponent {
         this.isLoading = false;
         this.isSuccess =  true;
         this.isError =false;
-        console.log(results);
       })
       .catch((err)=>{console.log(err);
         this.isDetails = false;
@@ -122,14 +107,14 @@ export class EmployeeFormComponent {
   }
 
   onOKButtonClicked() {
-    if(this.isSuccess && !this.isUpdate){
+    /*if(this.isSuccess && !this.isUpdate){
       this.employeeForm.reset();
       //this.router.navigate([`/companies`]);
     }
-
     this.isDetails = true;
     this.isError = false;
     this.isLoading = false;
-    this.isSuccess = false;
+    this.isSuccess = false;*/
+    this.location.back();
   }
 }

@@ -17,28 +17,9 @@ export class ApiService {
       'Authorization': `Bearer ${this.apiKey}`
     }),
   };
-  tempCompany:Company={
-    id: null,
-    name: '',
-    address: '',
-    industry: '',
-    description: '',
-    phoneNumber: '',
-    imageUrl: '',
-    createdDate: new Date().getTime()
-  }
-  tempEmployee:Employee={
-    id: null,
-    name: '',
-    email: '',
-    jobTitle: '',
-    jobDescription: '',
-    phoneNumber: '',
-    imageUrl: '',
-    startDate: new Date().getTime(),
-    companyUid: 0,
-    company: this.tempCompany
-  }
+  AllCompanies:any={}
+  AllEmployees:any={}
+  
   constructor(private http: HttpClient) { }
 
   log(data:any){
@@ -65,7 +46,7 @@ export class ApiService {
     return this.http.put(url,data,this.httpOptions).toPromise();
   }
 
-  deleteCompanyById(companyId:string): Promise<any> {
+  deleteCompanyById(companyId:any): Promise<any> {
     const url = `${this.baseUrl}/company/delete/${companyId}`; 
     return this.http.delete(url,this.httpOptions).toPromise();
   }

@@ -23,7 +23,6 @@ export class CompanyCardComponent {
 
   navigateToCompany() {
     if(this.company?.id!==null){
-      this.apiService.tempCompany =this.company;
       this.router.navigate(['/company', this.company?.id]);
     }
   }

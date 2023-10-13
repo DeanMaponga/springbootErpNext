@@ -18,6 +18,11 @@ export class EmployeeComponent {
     .then((results) => {
       this.isLoading = false;
       this.employees = results;//.reverse();
+      for(const employee of this.employees){
+        if(employee.id!=null){
+          this.apiService.AllEmployees[employee.id]=employee;
+        }
+      }
     })
     .catch((error) => {
         console.error('Error fetching employees:', error);

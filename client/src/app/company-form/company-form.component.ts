@@ -70,11 +70,15 @@ export class CompanyFormComponent {
       this.company.createdDate=this.companyForm.value.registrationDate.getTime();
       this.callAPI()
       .then((results)=>{
+        this.company=results;
+        if(this.company.id!=null){
+          this.apiService.AllCompanies[this.company.id]=this.company;
+        }
+
         this.isDetails = false;
         this.isLoading = false;
         this.isSuccess =  true;
         this.isError =false;
-        console.log(results);
       })
       .catch((err)=>{console.log(err);
         this.isDetails = false;
@@ -95,14 +99,13 @@ export class CompanyFormComponent {
   }
 
   onOKButtonClicked() {
-    if(this.isSuccess && !this.isUpdate){
-      this.companyForm.reset();
-      this.router.navigate([`/companies`]);
-    }
-
     this.isDetails = true;
     this.isError = false;
     this.isLoading = false;
     this.isSuccess = false;
+
+    if(this.company?.id!==null){
+      this.router.navigate(['/company', this.company?.id]);
+    }
   }
 }
